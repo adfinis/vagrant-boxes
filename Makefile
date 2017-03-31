@@ -14,10 +14,18 @@ help:  ## display this help
 build: | $(DISKS)  ## build all vagrant boxes
 
 clean:  ## remove all images
+	rm packer
 	rm -f *.qcow2
 	rm -rf output/
 
-%.qcow2: %.json
-	packer build $<
+%.qcow2: %.json | packer
+	./packer build $<
 	mv output/$@ .
 	rm -rf output/
+
+packer: | .packer.zip  ## install hashicorp packer to local directory
+	unzip .packer.zip
+	rm .packer.zip
+
+.packer.zip:
+	wget -O .packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
