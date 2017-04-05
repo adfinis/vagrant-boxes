@@ -20,7 +20,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-      "vm_name": "adsy-ubuntu-14.qcow2",
+      "vm_name": "adsy-ubuntu-14",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "boot_wait": "5s",
@@ -28,11 +28,11 @@
         "<esc><wait>",
         "<esc><wait>",
 		"<enter><wait>",
-        " /install/vmlinuz",
+        "/install/vmlinuz",
         " initrd=/install/initrd.gz",
         " auto=true",
 		" priority=critical",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/adsy-ubuntu-14_ks.cfg",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
 		" --",
         "<enter><wait>"
       ]
