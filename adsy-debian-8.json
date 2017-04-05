@@ -55,6 +55,48 @@
           "1"
         ]
       ]
+    },
+    {
+      "type": "qemu",
+      "iso_url": "http://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-8.7.1-amd64-netinst.iso",
+      "iso_checksum": "749a15b7690769dd99e85d6104182a03d370b04b36106ec7cfaf6a551aa89fb4",
+      "iso_checksum_type": "sha256",
+      "output_directory": "output",
+      "disk_size": 10240,
+      "format": "qcow2",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10m",
+      "shutdown_command": "echo 'vagrant'|sudo -S shutdown -h -P now",
+      "vm_name": "adsy-debian-8",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc>",
+        " install",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
+        " debian-installer=en_US",
+        " auto",
+        " locale=en_US",
+        " kbd-chooser/method=us",
+        " netcfg/get_hostname={{ .Name }}",
+        " netcfg/get_domain=example.com",
+        " fb=false",
+        " debconf/frontend=noninteractive",
+        " console-setup/ask_detect=false",
+        " console-keymaps-at/keymap=us",
+        " keyboard-configuration/xkb-keymap=us",
+        "<enter><wait>"
+      ],
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio"
     }
   ],
   "provisioners": [

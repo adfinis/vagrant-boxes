@@ -2,8 +2,9 @@
 
 .PHONY: all help build clean run
 
-IMAGES	:= $(wildcard *.json)
-DISKS	:= $(patsubst %.json, virtualbox-%.box, $(IMAGES))
+IMAGES		:= $(wildcard *.json)
+VIRTUALBOX	:= $(patsubst %.json, virtualbox-%.box, $(IMAGES))
+LIBVIRT		:= $(patsubst %.json, libvirt-%.box, $(IMAGES))
 
 all:
 
@@ -11,7 +12,7 @@ help:  ## display this help
 	@cat $(MAKEFILE_LIST) | grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' | \
 		sort -k1,1 | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-build: $(DISKS)  ## build all vagrant boxes
+build: $(VIRTUALBOX) $(LIBVIRT)  ## build all vagrant boxes
 
 clean:  ## remove all images
 	rm packer
@@ -19,7 +20,11 @@ clean:  ## remove all images
 
 virtualbox-%.box: %.json | packer
 	@echo "Build vagrant box $@"
-	./packer build $<
+	./packer build --only=virtualbox-iso $<
+
+libvirt-%.box: %.json | packer
+	@echo "Build libvirt box $@"
+	./packer build --only=qemu $<
 
 packer: | .packer.zip  ## install hashicorp packer to local directory
 	unzip .packer.zip
