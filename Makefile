@@ -26,9 +26,9 @@ clean:  ## remove all images
 output/%: %.json | packer
 	./packer build $<
 
-packer: | packer.zip  ## install hashicorp packer to local directory
-	unzip packer.zip
-	rm -f packer.zip
+packer: | .packer.zip  ## install hashicorp packer to local directory
+	unzip .packer.zip
+	rm -f .packer.zip
 
-packer.zip:
+.packer.zip:
 	wget -O packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
