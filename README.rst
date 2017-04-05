@@ -16,5 +16,11 @@ Build some basic plain images.
 
   make build
 
+Remove all builded images and cached files.
+
+.. code-block:: Bash
+
+  make clean
+
 
 .. vim: set ft=rst sw=2 ts=2 et wrap tw=76:

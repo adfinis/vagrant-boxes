@@ -11,21 +11,24 @@ help:  ## display this help
 	@cat $(MAKEFILE_LIST) | grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' | \
 		sort -k1,1 | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-build: | $(DISKS)  ## build all vagrant boxes
+build: $(DISKS)  ## build all vagrant boxes
 
 clean:  ## remove all images
 	rm packer
 	rm -f *.qcow2
 	rm -rf output/
+	rm -rf packer_cache/
 
-%.qcow2: %.json | packer
-	./packer build $<
-	mv output/$@ .
+%.qcow2: output/%
+	mv $< $@
 	rm -rf output/
 
-packer: | .packer.zip  ## install hashicorp packer to local directory
-	unzip .packer.zip
-	rm .packer.zip
+output/%: %.json | packer
+	./packer build $<
 
-.packer.zip:
-	wget -O .packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
+packer: | packer.zip  ## install hashicorp packer to local directory
+	unzip packer.zip
+	rm -f packer.zip
+
+packer.zip:
+	wget -O packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
