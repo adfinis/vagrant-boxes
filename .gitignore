@@ -1,7 +1,13 @@
 # .gitignore
 
+# packer binary
 /packer
+
+# downloaded and builded stuff
 *.zip
 *.box
 *.iso
 *.qcow2
+
+# temporary data
+/output
