@@ -47,6 +47,21 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/sudo.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/virtualbox.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/cleanup.sh"
+    }
   ],
   "post-processors": [
     {
