@@ -1,15 +1,14 @@
 {
   "builders": [
     {
-      "type": "qemu",
+      "type": "virtualbox-iso",
       "iso_url": "http://old-releases.ubuntu.com/releases/14.04.4/ubuntu-14.04-server-amd64.iso",
       "iso_checksum": "ababb88a492e08759fddcf4f05e5ccc58ec9d47fa37550d63931d0a5fa4f7388",
       "iso_checksum_type": "sha256",
       "output_directory": "output",
       "disk_size": 10240,
-      "format": "qcow2",
+      "format": "ovf",
       "headless": false,
-      "accelerator": "kvm",
       "http_directory": "httpdir",
       "http_port_min": 10082,
       "http_port_max": 10089,
@@ -21,20 +20,35 @@
       "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
       "vm_name": "adsy-ubuntu-14",
-      "net_device": "virtio-net",
-      "disk_interface": "virtio",
       "boot_wait": "5s",
       "boot_command": [
         "<esc><wait>",
         "<esc><wait>",
-		"<enter><wait>",
+        "<enter><wait>",
         "/install/vmlinuz",
         " initrd=/install/initrd.gz",
         " auto=true",
-		" priority=critical",
+        " priority=critical",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
-		" --",
+        " --",
         "<enter><wait>"
+      ],
+      "guest_os_type": "Ubuntu_64",
+      "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--cpus",
+          "1"
+        ]
       ]
     }
   ],

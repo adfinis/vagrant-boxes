@@ -3,7 +3,7 @@
 .PHONY: all help build clean run
 
 IMAGES	:= $(wildcard *.json)
-DISKS	:= $(patsubst %.json, libvirt-%.box, $(IMAGES))
+DISKS	:= $(patsubst %.json, virtualbox-%.box, $(IMAGES))
 
 all:
 
@@ -15,9 +15,9 @@ build: $(DISKS)  ## build all vagrant boxes
 
 clean:  ## remove all images
 	rm packer
-	rm -rf *.qcow2 *.box output/ packer_cache/
+	rm -rf *.qcow2 *.box packer_cache/
 
-libvirt-%.box: %.json | packer
+virtualbox-%.box: %.json | packer
 	@echo "Build vagrant box $@"
 	./packer build $<
 
@@ -26,4 +26,4 @@ packer: | .packer.zip  ## install hashicorp packer to local directory
 	rm -f .packer.zip
 
 .packer.zip:
-	wget -O packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
+	wget -O .packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip

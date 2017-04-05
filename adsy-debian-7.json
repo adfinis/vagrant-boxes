@@ -1,15 +1,14 @@
 {
   "builders": [
     {
-      "type": "qemu",
+      "type": "virtualbox-iso",
       "iso_url": "http://cdimage.debian.org/cdimage/archive/7.11.0/amd64/iso-cd/debian-7.11.0-amd64-netinst.iso",
       "iso_checksum": "62876fb786f203bc732ec1bd2ca4c8faea19d0a97c5936d69f3406ef92ff49bd",
       "iso_checksum_type": "sha256",
       "output_directory": "output",
       "disk_size": 10240,
-      "format": "qcow2",
+      "format": "ovf",
       "headless": false,
-      "accelerator": "kvm",
       "http_directory": "httpdir",
       "http_port_min": 10082,
       "http_port_max": 10089,
@@ -21,8 +20,6 @@
       "ssh_wait_timeout": "10m",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -h -P now",
       "vm_name": "adsy-debian-7",
-      "net_device": "virtio-net",
-      "disk_interface": "virtio",
       "boot_wait": "5s",
       "boot_command": [
         "<esc>",
@@ -40,6 +37,23 @@
         " console-keymaps-at/keymap=us",
         " keyboard-configuration/xkb-keymap=us",
         "<enter><wait>"
+      ],
+      "guest_os_type": "Debian_64",
+      "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--cpus",
+          "1"
+        ]
       ]
     }
   ],
