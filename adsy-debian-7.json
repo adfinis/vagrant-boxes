@@ -23,7 +23,7 @@
       "boot_wait": "5s",
       "boot_command": [
         "<esc>",
-        "install",
+        " install",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
         " debian-installer=en_US",
         " auto",
