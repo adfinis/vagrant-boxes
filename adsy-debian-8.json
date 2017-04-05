@@ -46,5 +46,9 @@
   "provisioners": [
   ],
   "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{ .Provider }}-adsy-debian-8.box"
+    }
   ]
 }

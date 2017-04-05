@@ -35,5 +35,9 @@
   "provisioners": [
   ],
   "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{ .Provider }}-adsy-centos-6.box"
+    }
   ]
 }
