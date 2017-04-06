@@ -22,8 +22,8 @@
       "vm_name": "adsy-debian-7",
       "boot_wait": "5s",
       "boot_command": [
-        "<esc>",
-        " install",
+        "<esc><wait>",
+        "install",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
         " debian-installer=en_US",
         " auto",
@@ -78,8 +78,8 @@
       "vm_name": "adsy-debian-7",
       "boot_wait": "5s",
       "boot_command": [
-        "<esc>",
-        " install",
+        "<esc><wait>",
+        "install",
         " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
         " debian-installer=en_US",
         " auto",

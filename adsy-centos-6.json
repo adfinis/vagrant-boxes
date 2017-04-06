@@ -22,7 +22,7 @@
       "vm_name": "adsy-centos-6",
       "boot_wait": "5s",
       "boot_command": [
-        "<tab>",
+        "<tab><wait>",
         " text",
         " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
         "<enter><wait>"
@@ -67,7 +67,7 @@
       "vm_name": "adsy-centos-6",
       "boot_wait": "5s",
       "boot_command": [
-        "<tab>",
+        "<tab><wait>",
         " text",
         " ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
         "<enter><wait>"
