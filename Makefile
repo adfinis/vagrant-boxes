@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: all help build clean run
+.PHONY: all help build clean run qemu virtualbox
 
 IMAGES		:= $(wildcard *.json)
 VIRTUALBOX	:= $(patsubst %.json, virtualbox-%.box, $(IMAGES))
@@ -13,6 +13,10 @@ help:  ## display this help
 		sort -k1,1 | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 build: $(VIRTUALBOX) $(LIBVIRT)  ## build all vagrant boxes
+
+virtualbox: $(VIRTUALBOX)  ## build all vagrant virtualbox boxes
+
+qemu: $(LIBVIRT)  ## build all vagrant qemu boxes
 
 clean:  ## remove all images
 	rm packer
