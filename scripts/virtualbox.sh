@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ ! -f /home/vagrant/.vbox_version ]; then
+    # not virtualbox provider
+    exit 0
+fi
+
 VBOX_VERSION="$(cat /home/vagrant/.vbox_version)"
 
 mkdir -p /tmp/vbox
