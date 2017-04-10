@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: all help build virtualbox qemu clean
+.PHONY: all help build virtualbox qemu clean install
 
 IMAGES		:= $(wildcard *.json)
 VIRTUALBOX	:= $(patsubst %.json, virtualbox-%.box, $(IMAGES))
@@ -34,3 +34,9 @@ packer:  ## install hashicorp packer to local directory
 	wget -O .packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
 	unzip .packer.zip
 	rm -f .packer.zip
+
+install:  ## install vagrant boxes
+	for f in *.box; do \
+		vagrant box remove "$$(basename "$$f" .box | cut -d- -f2-)"; \
+		vagrant box add --name "$$(basename "$$f" .box | cut -d- -f2-)" "$$f"; \
+	done
