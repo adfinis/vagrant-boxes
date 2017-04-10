@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: all help build clean run qemu virtualbox
+.PHONY: all help build virtualbox qemu clean
 
 IMAGES		:= $(wildcard *.json)
 VIRTUALBOX	:= $(patsubst %.json, virtualbox-%.box, $(IMAGES))
