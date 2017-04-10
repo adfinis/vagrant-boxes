@@ -30,9 +30,7 @@ libvirt-%.box: %.json | packer
 	@echo "Build libvirt box $@"
 	./packer build --only=qemu $<
 
-packer: | .packer.zip  ## install hashicorp packer to local directory
+packer:  ## install hashicorp packer to local directory
+	wget -O .packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
 	unzip .packer.zip
 	rm -f .packer.zip
-
-.packer.zip:
-	wget -O .packer.zip https://releases.hashicorp.com/packer/0.12.3/packer_0.12.3_linux_amd64.zip
