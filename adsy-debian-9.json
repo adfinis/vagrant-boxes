@@ -1,0 +1,130 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.0.0-amd64-netinst.iso",
+      "iso_checksum": "9d98f339016dc2a3998881949a8f0678baede26b5106f18ef1168d7e13606773",
+      "iso_checksum_type": "sha256",
+      "output_directory": "output/adsy-debian-9",
+      "disk_size": 20480,
+      "format": "ovf",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10m",
+      "shutdown_command": "echo 'vagrant'|sudo -S shutdown -h -P now",
+      "vm_name": "adsy-debian-9",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc><wait>",
+        "install",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
+        " debian-installer=en_US",
+        " auto",
+        " locale=en_US",
+        " kbd-chooser/method=us",
+        " netcfg/get_hostname={{ .Name }}",
+        " netcfg/get_domain=example.com",
+        " fb=false",
+        " debconf/frontend=noninteractive",
+        " console-setup/ask_detect=false",
+        " console-keymaps-at/keymap=us",
+        " keyboard-configuration/xkb-keymap=us",
+        "<enter><wait>"
+      ],
+      "guest_os_type": "Debian_64",
+      "guest_additions_path": "VBoxGuestAdditions_{{ .Version }}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{ .Name }}",
+          "--cpus",
+          "1"
+        ]
+      ]
+    },
+    {
+      "type": "qemu",
+      "iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.0.0-amd64-netinst.iso",
+      "iso_checksum": "9d98f339016dc2a3998881949a8f0678baede26b5106f18ef1168d7e13606773",
+      "iso_checksum_type": "sha256",
+      "output_directory": "output/adsy-debian-9",
+      "disk_size": 20480,
+      "format": "qcow2",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10m",
+      "shutdown_command": "echo 'vagrant'|sudo -S shutdown -h -P now",
+      "vm_name": "adsy-debian-9",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc><wait>",
+        "install",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ .Name }}_ks.cfg",
+        " debian-installer=en_US",
+        " auto",
+        " locale=en_US",
+        " kbd-chooser/method=us",
+        " netcfg/get_hostname={{ .Name }}",
+        " netcfg/get_domain=example.com",
+        " fb=false",
+        " debconf/frontend=noninteractive",
+        " console-setup/ask_detect=false",
+        " console-keymaps-at/keymap=us",
+        " keyboard-configuration/xkb-keymap=us",
+        "<enter><wait>"
+      ],
+      "accelerator": "kvm",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/sudo.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/sshd.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/virtualbox.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash '{{ .Path }}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{ .Provider }}-adsy-debian-9.box"
+    }
+  ]
+}
