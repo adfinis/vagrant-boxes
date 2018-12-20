@@ -14,5 +14,5 @@ before_script:
 
 script:
   - date
-  - make virtualbox
+  - travis_wait make virtualbox
   - date
