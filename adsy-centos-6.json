@@ -2,8 +2,8 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "iso_url": "https://pkg.adfinis-sygroup.ch/centos/6/isos/x86_64/CentOS-6.8-x86_64-netinstall.iso",
-      "iso_checksum": "56d9cc5757ed1443af7b321967622a108978328f72e58050d31bcf1998dfd162",
+      "iso_url": "https://pkg.adfinis-sygroup.ch/centos/6/isos/x86_64/CentOS-6.10-x86_64-netinstall.iso",
+      "iso_checksum": "56f7b078a3b443095ba006cdc85319c691251cda98c5d73d12ef6db7aff6b4c1",
       "iso_checksum_type": "sha256",
       "output_directory": "output/adsy-centos-6",
       "disk_size": 20480,
@@ -47,8 +47,8 @@
     },
     {
       "type": "qemu",
-      "iso_url": "https://pkg.adfinis-sygroup.ch/centos/6/isos/x86_64/CentOS-6.8-x86_64-netinstall.iso",
-      "iso_checksum": "56d9cc5757ed1443af7b321967622a108978328f72e58050d31bcf1998dfd162",
+      "iso_url": "https://pkg.adfinis-sygroup.ch/centos/6/isos/x86_64/CentOS-6.10-x86_64-minimal.iso",
+      "iso_checksum": "56f7b078a3b443095ba006cdc85319c691251cda98c5d73d12ef6db7aff6b4c1",
       "iso_checksum_type": "sha256",
       "output_directory": "output/adsy-centos-6",
       "disk_size": 20480,

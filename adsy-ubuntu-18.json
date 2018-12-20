@@ -2,10 +2,10 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "iso_url": "https://mirror.init7.net/ubuntu-releases/xenial/ubuntu-16.04.5-server-amd64.iso",
-      "iso_checksum": "6b505fd3b6f816f8ff058710f127a9900e9233e496783ce08a0022814d224810",
+      "iso_url": "https://mirror.init7.net/ubuntu-releases/bionic/ubuntu-18.04.1.0-live-server-amd64.iso",
+      "iso_checksum": "7b37dfcd082726303528e47c82f88f29c1dc9232f8fd39120d13749ae83cc463",
       "iso_checksum_type": "sha256",
-      "output_directory": "output/adsy-ubuntu-16",
+      "output_directory": "output/adsy-ubuntu-18",
       "disk_size": 20480,
       "format": "ovf",
       "headless": false,
@@ -19,7 +19,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-      "vm_name": "adsy-ubuntu-16",
+      "vm_name": "adsy-ubuntu-18",
       "boot_wait": "5s",
       "boot_command": [
         "<enter><wait><f6><esc>",
@@ -69,10 +69,10 @@
     },
     {
       "type": "qemu",
-      "iso_url": "https://mirror.init7.net/ubuntu-releases/xenial/ubuntu-16.04.5-server-amd64.iso",
-      "iso_checksum": "6b505fd3b6f816f8ff058710f127a9900e9233e496783ce08a0022814d224810",
+      "iso_url": "https://mirror.init7.net/ubuntu-releases/bionic/ubuntu-18.04.1.0-live-server-amd64.iso",
+      "iso_checksum": "7b37dfcd082726303528e47c82f88f29c1dc9232f8fd39120d13749ae83cc463",
       "iso_checksum_type": "sha256",
-      "output_directory": "output/adsy-ubuntu-16",
+      "output_directory": "output/adsy-ubuntu-18",
       "disk_size": 20480,
       "format": "qcow2",
       "headless": false,
@@ -86,7 +86,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "20m",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-      "vm_name": "adsy-ubuntu-16",
+      "vm_name": "adsy-ubuntu-18",
       "boot_wait": "5s",
       "boot_command": [
         "<enter><wait><f6><esc>",
@@ -146,7 +146,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "{{ .Provider }}-adsy-ubuntu-16.box"
+      "output": "{{ .Provider }}-adsy-ubuntu-18.box"
     }
   ]
 }
