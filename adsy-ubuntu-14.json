@@ -2,8 +2,8 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "iso_url": "http://mirror.switch.ch/ftp/mirror/ubuntu-cdimage/14.04/ubuntu-14.04.5-server-amd64.iso",
-      "iso_checksum": "dde07d37647a1d2d9247e33f14e91acb10445a97578384896b4e1d985f754cc1",
+      "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.5-desktop-amd64.iso",
+      "iso_checksum": "f5ce20686a2f3201f04a309d04171ee15757f00954b33b87f3f1d36b3b0f5356",
       "iso_checksum_type": "sha256",
       "output_directory": "output/adsy-ubuntu-14",
       "disk_size": 20480,
@@ -53,8 +53,8 @@
     },
     {
       "type": "qemu",
-      "iso_url": "http://mirror.switch.ch/ftp/mirror/ubuntu-cdimage/14.04/ubuntu-14.04.5-server-amd64.iso",
-      "iso_checksum": "dde07d37647a1d2d9247e33f14e91acb10445a97578384896b4e1d985f754cc1",
+      "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.5-desktop-amd64.iso",
+      "iso_checksum": "f5ce20686a2f3201f04a309d04171ee15757f00954b33b87f3f1d36b3b0f5356",
       "iso_checksum_type": "sha256",
       "output_directory": "output/adsy-ubuntu-14",
       "disk_size": 20480,
